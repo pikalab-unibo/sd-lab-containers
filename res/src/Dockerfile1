@@ -1,0 +1,13 @@
+# Alpine Linux with pre-installed JDK8 (https://hub.docker.com/_/java)
+FROM java:openjdk-8-alpine
+# Copies everything from 'my-app/' (on the host) to '/my-app/' on the container file system
+COPY ./ /my-app/
+# Moves to the /my-app/ directory on the container file system
+WORKDIR /my-app/
+# Compiles the to-be-deployed app
+RUN ./gradlew build
+# Sets some env. var. on the container
+ENV USERNAME %*\textit{<your name>}*) 
+ENV GRD_OPTS --console=plain
+# Run the application by default
+CMD ./gradlew run $GRD_OPTS

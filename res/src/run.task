@@ -1,0 +1,13 @@
+run {
+  main = 'App' // The qualified name of the class to be run
+  description = "Runs App.java" // A tdescription for the task
+  standardInput = System.in // Set the application stdin to Gradle's stdin
+  classpath = sourceSets.main.runtimeClasspath // Set the application classpath
+  args = [] // Set the application arguments to an empty list
+  
+  if (rootProject.hasProperty("username")) { // Checks whether a property with key "username" exists
+    args += [rootProject.property("username")] // in case, appends its value to the application arguments
+  } else {
+    args += ["nobody"] // otherwise, appends a default value to the application arguments
+  }
+}
