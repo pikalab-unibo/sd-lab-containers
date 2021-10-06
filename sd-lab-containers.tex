@@ -1,10 +1,10 @@
 % !TeX spellcheck = en_GB
-\documentclass{beamer}\mode<presentation>{\usetheme{AMSCesenaPurpleAndGold}}
+\documentclass{beamer}\mode<presentation>{\usetheme{AMSBolognaFC}}
 \setbeamertemplate{bibliography item}{\insertbiblabel}
 
 \usepackage{common}
 
-\newcommand{\labN}{10}
+\newcommand{\labN}{2}
 
 \title[L\labN{} -- Containers 101]{L\labN{} -- Containers 101}
 %
@@ -17,7 +17,7 @@
 \institute[DISI, Univ. Bologna]
 {Dipartimento di Informatica -- Scienza e Ingegneria (DISI)\\\textsc{Alma Mater Studiorum} -- Universit{\`a} di Bologna a Cesena}
 %
-\date[A.Y. 2020/2021]{Academic Year 2020/2021}
+\date[A.Y. 2021/2022]{Academic Year 2020/2021}
 
 \setbeamercovered{transparent}
 
@@ -67,9 +67,9 @@
 
         \vfill{}
 
-        \item By reading \href{https://github.com/gciatto-unibo/sd-lab-environment-configuration}{Lab-0}, you can easily:
+        \item By reading \cite{envConf}, you can easily:
         \begin{itemize}
-            \item[$\checkmark$] install Gradle and Docker on your personal PC
+            \item[$\checkmark$] install Docker on your personal PC
             \item[$\rightarrow$] register a Docker ID with your \texttt{@studio.unibo.it} email address
         \end{itemize}
     \end{itemize}
@@ -103,11 +103,11 @@
 
     \begin{itemize}
         \item We will exploit containers to easily deploy our software
-        
+
         \item So will you, for your projects, if possible
-        
+
         \item You may also use containers to simulate a distributed application on a single machine
-        
+
         \item Containers are the building blocks of \alert{stacks}, which in turn are managed by \alert{orchestrators}, to deploy (\alert{micro})\alert{services}.
         This is what happens, for instance, behind the scenes of a \alert{Cloud} provider
 
@@ -132,15 +132,15 @@
     %
     \begin{itemize}
         \item It assumes images are created out of an existing application by means of \alert{\texttt{Dockefile}s}
-        
+
         \begin{itemize}
             \item Think about an image as a shut-down OS where a single application -- along with all its dependencies -- is installed
         \end{itemize}
 
         \vfill
-        
+
         \item Containers can be instantiated (i.e. \alert{run}) out of some pre-existing image by invoking a program which is assumed to be installed on that image
-        
+
         \begin{itemize}
             \item Think about the instantiation process as turning on the OS and invoking that application
         \end{itemize}
@@ -235,7 +235,7 @@
 \begin{frame}
 \frametitle{Docker Containers II}
     \begin{itemize}
-        \item We will only exploit the folloing options in this lesson:
+        \item We will only exploit the following options in this lesson:
         %
         \begin{description}
             \item[\texttt{-i}] | runs the container in \emph{\alert{i}nteractive} mode
@@ -247,7 +247,10 @@
             \item[\texttt{-e \textit{<key>}=<value>}] | sets an \emph{\alert{e}nvironment} variable \texttt{\textit{<key>}} to \texttt{<value>} on the container, before \texttt{<cmd>} is invoked
 
             \item[\texttt{-p \textit{<host>}:<guest>}] | \emph{\alert{p}ublish} port \texttt{<guest>} on the container to port \texttt{\textit{<host>}} on the host
-            % \item[\texttt{-h \textit{<hostname>}}]  |  sets the \emph{\alert{h}ostname} of the container to \texttt{\textit{<hostname>}}
+
+            \item[\texttt{-h \textit{<hostname>}}]  |  sets the \emph{\alert{h}ostname} of the container to \texttt{\textit{<hostname>}}
+
+            \item[\texttt{-v \textit{<local path>:<mount path>}}]  |  mounts the host's directory \texttt{<local path>} on the container, as a the \emph{\alert{v}olume}, into \texttt{\textit{<mount path>}}
 
             \item[\texttt{--name \textit{<name>}}]  |  assigns a unique \emph{\alert{n}ame} to the container
         \end{description}
@@ -396,13 +399,13 @@
     \begin{enumerate}
         \item Conder the following Java program, and sopposed it has been properly Gradlefied
         %
-        \lstinputlisting[language=Java]{./res/src/App1.java}
+        \lstinputlisting[language=Java]{./src/App1.java}
 
         \framebreak
 
         \item Create a new file named \alert{\texttt{Dockerfile}} withing the project root directory (say \alert{\texttt{my-app}}), containing the following lines:
         %
-        \lstinputlisting[language=docker]{./res/src/Dockerfile1}
+        \lstinputlisting[language=docker]{./src/Dockerfile1}
 
         \framebreak
 
@@ -478,24 +481,24 @@
 
 \begin{frame}%[allowframebreaks]
     \frametitle{Docker Swarm Functionalities}
-    
-    
+
+
     \begin{itemize}
         \item Docker engines may be run in \emph{Swarm} mode
         %
         \begin{itemize}
             \item[\$] \texttt{docker swarm init{\color{gray}|join}}
         \end{itemize}
-        
+
         \vfill
-        
-        \item Swarms are \alert{clusters} of machines running \emph{federated} Docker engines 
+
+        \item Swarms are \alert{clusters} of machines running \emph{federated} Docker engines
         %
         \begin{itemize}
             \item nodes may be added to the cluster dynamically
             \item container may be executed/replicated on several nodes
         \end{itemize}
-        
+
         \vfill
 
         \item In Swarm mode, Docker engines support more functionalities:
@@ -503,7 +506,7 @@
         \begin{description}
             \item[services] | possibly replicated servers with automatic load distribution
             \item[networks] | virtual networks shared by serveral containers or services
-            \item[stacks] | ensembles of services which must be deployed together, possibly in an orderly fashion 
+            \item[stacks] | ensembles of services which must be deployed together, possibly in an orderly fashion
         \end{description}
 
         \vfill
@@ -516,7 +519,7 @@
         \end{itemize}
 
     \end{itemize}
-    
+
 \end{frame}
 
 \begin{frame}%[allowframebreaks]
@@ -674,7 +677,7 @@
     	\scriptsize
     %\tiny
     \bibliographystyle{plain}
-    \bibliography{sd-lab-automation}
+    \bibliography{sd-lab-containers}
 \end{frame}
 %\\\\\\\\\\\\\\\\\\\\\
 
