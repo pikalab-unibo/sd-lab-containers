@@ -211,69 +211,68 @@
 
 \subsubsection{Containers}
 
-\begin{frame}
-\frametitle{Docker Containers I}
+\begin{frame}[allowframebreaks]
+\frametitle{Docker Containers}
 
+\begin{itemize}
+    \item Docker containers can be instantiated by means of the following syntax:
+    %
     \begin{itemize}
-        \item Docker containers can be instantiated by means of the following syntax:
-        %
-        \begin{itemize}
-            \item[\$] \texttt{docker [container] \alert{run} [\alert{<opts>}] \alert{\textit{<image>}} [\alert{<cmd>} [\textit{\alert{<args>}}]]}
-        \end{itemize}
-        %
-        where :
-        \begin{description}
-            \item[\texttt{\textit{<image>}}] is the image to be instantiated,
-            \item[\texttt{<cmd>}] is the command to be executed on the container, once instantiated (optional)
-            \item[\texttt{\textit{<args>}}] is a sequence of space-separated arguments for \texttt{<cmd>}
-            \item[\texttt{<opts>}] is a possibly empty sequence of options for the container instantiation. Several are available.
-        \end{description}
-        %
+        \item[\$] \texttt{docker [container] \alert{run} [\alert{<opts>}] \alert{\textit{<image>}} [\alert{<cmd>} [\textit{\alert{<args>}}]]}
     \end{itemize}
-\end{frame}
+    %
+    where :
+    \begin{description}
+        \item[\texttt{\textit{<image>}}] is the image to be instantiated,
+        \item[\texttt{<cmd>}] is the command to be executed on the container, once instantiated (optional)
+        \item[\texttt{\textit{<args>}}] is a sequence of space-separated arguments for \texttt{<cmd>}
+        \item[\texttt{<opts>}] is a possibly empty sequence of options for the container instantiation. Several are available.
+    \end{description}
 
-\begin{frame}
-\frametitle{Docker Containers II}
+    \framebreak
+
+    \item We will only exploit the following options in this lesson:
+    %
+    \begin{description}\small
+        \item[\texttt{-i}] | runs the container in \emph{\alert{i}nteractive} mode
+
+        \item[\texttt{-t}] | runs the container in \emph{\alert{t}erminal} emulation mode
+
+        \item[\texttt{-d}] | runs the container in \emph{\alert{d}aemon} mode \hint{daemons = services}
+
+        \item[\texttt{--rm}] | \emph{\alert{r}e\alert{m}oves} the container after it terminates
+
+        \item[\texttt{-e \textit{<key>}=<value>}] | sets an \emph{\alert{e}nvironment} variable \texttt{\textit{<key>}} to \texttt{<value>} on the container, before \texttt{<cmd>} is invoked
+
+        \item[\texttt{-p \textit{<host>}:<guest>}] | \emph{\alert{p}ublish} port \texttt{<guest>} on the container to port \texttt{\textit{<host>}} on the host
+
+        \item[\texttt{-h \textit{<hostname>}}]  |  sets the \emph{\alert{h}ostname} of the container to \texttt{\textit{<hostname>}}
+
+        \item[\texttt{-v \textit{<host path>}:<guest path>}]  |  mounts the host's \texttt{\textit{<host path>}} on the container, into \texttt{<guest path>}, as a \emph{\alert{v}olume}
+
+        \item[\texttt{--name \textit{<name>}}]  |  assigns a unique \emph{\alert{n}ame} to the container
+    \end{description}
+
+    \framebreak
+
+    \item As soon as \texttt{<cmd>} terminates its execution, the container is teminated too and any side effect applied to its storage is reverted
+
+    \medskip
+
+    \item If your application (\texttt{<cmd>}) requires NO user interaction and it CAN just run in the background, you must run it in daemon mode, otherwise in interactive mode
+
+    \medskip
+
+    \item In interactive mode, the application's \texttt{stdin}, \texttt{stdout}, \texttt{stderr} are redirected to/from your console
+    %
     \begin{itemize}
-        \item We will only exploit the following options in this lesson:
-        %
-        \begin{description}
-            \item[\texttt{-i}] | runs the container in \emph{\alert{i}nteractive} mode
-
-            \item[\texttt{-t}] | runs the container in \emph{\alert{t}erminal} emulation mode
-
-            \item[\texttt{-d}] | runs the container in \emph{\alert{d}aemon} mode \hint{daemons = services}
-
-            \item[\texttt{-e \textit{<key>}=<value>}] | sets an \emph{\alert{e}nvironment} variable \texttt{\textit{<key>}} to \texttt{<value>} on the container, before \texttt{<cmd>} is invoked
-
-            \item[\texttt{-p \textit{<host>}:<guest>}] | \emph{\alert{p}ublish} port \texttt{<guest>} on the container to port \texttt{\textit{<host>}} on the host
-
-            \item[\texttt{-h \textit{<hostname>}}]  |  sets the \emph{\alert{h}ostname} of the container to \texttt{\textit{<hostname>}}
-
-            \item[\texttt{-v \textit{<local path>:<mount path>}}]  |  mounts the host's directory \texttt{<local path>} on the container, as a the \emph{\alert{v}olume}, into \texttt{\textit{<mount path>}}
-
-            \item[\texttt{--name \textit{<name>}}]  |  assigns a unique \emph{\alert{n}ame} to the container
-        \end{description}
-
+        \item this is necessary if the containerised applicationion need to consume the users' inputs
     \end{itemize}
-\end{frame}
 
-\begin{frame}
-\frametitle{Docker Containers III}
-    \begin{itemize}
+    \medskip
 
-        \item As soon as \texttt{<cmd>} terminates its execution, the container is teminated too and any side effect applied to its storage is reverted
-
-        \item If your application (\texttt{<cmd>}) requires NO user interaction and it CAN just run in the background, you must run it in daemon mode, otherwise in interactive mode
-
-        \item In interactive mode, the application's \texttt{stdin}, \texttt{stdout}, \texttt{stderr} are redirected to/from your console
-        %
-        \begin{itemize}
-            \item this is necessary if the containerised applicationion need to consume the users' inputs
-        \end{itemize}
-
-        \item If you need to interact with some container's shell, you should run it in terminal emulation mode
-    \end{itemize}
+    \item If you need to interact with some container's shell, you should run it in terminal emulation mode
+\end{itemize}
 
 \end{frame}
 
@@ -290,23 +289,29 @@
                 \item You simply started a \alert{very minimal} shell
             \end{itemize}
         \end{itemize}
-        %
+
+        \vfill
+
         \item To convince your self you are within a tiny Linux VM, try running
         %
         \begin{itemize}
             \item[\$] \texttt{cd ; whoami ; pwd ; hostname ; echo \$MY\_MSG}
         \end{itemize}
-        %
+
+        \vfill
+
         \item Cool. What else can a raw Alpine Linux do? Is even Java installed?
         %
         \begin{itemize}
             \item[\$] \texttt{java -version ; javac -version}
         \end{itemize}
-        %
+
+        \vfill
+
         \item No, Java? So bad. Containers have access to the internet (if the guest does too), so you can install software on them
         %
         \begin{itemize}
-            \item[\$] \texttt{apk update ; apk add openjdk8} \hint{\href{https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management}{APK doc here}}
+            \item[\$] \texttt{apk update ; apk add openjdk11} \hint{\href{https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management}{APK doc here}}
             \item[\$] \texttt{java -version ; javac -version}
         \end{itemize}
 
