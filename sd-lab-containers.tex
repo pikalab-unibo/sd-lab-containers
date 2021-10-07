@@ -79,6 +79,15 @@
 \section{Containers}
 
 \begin{frame}
+    \frametitle{Bare metal vs. VM vs. Containers}
+
+    \begin{center}
+        \includegraphics[width=\linewidth]{img/vm-vs-containers.png}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}
 \frametitle{Containers}
 
     \begin{block}{}
@@ -86,13 +95,59 @@
     \end{block}
     %
     \begin{itemize}
-        \item Containers are aimed at being easily deployable on any machine running a container \alert{engine}
-        \item Such a machine is called \alert{host}
-        \item Containers are \alert{lightweight} because the share the host kernel and some of its resources
-        \item Containers are instances of some \alert{image}
+        \item They are deployable on any machine hosting a \alert{container engine}
+        %
+        \begin{itemize}\small
+            \item such a machine is called \alert{host}
+        \end{itemize}
+
+        \item They are \alert{lightweight} as they share the host's kernel \& resources
+
+        \item They are \alert{ephemeral} (storage \& side effects are discarded on end)
+%        %
+%        \begin{itemize}\small
+%            \item[ie] storage and side-effects are discarded upon termination
+%        \end{itemize}
+
+        \item Each container is an instance of some \alert{image}:
+        %
+        \begin{equation*}\small
+            \mathit{object} : \mathit{class} = \mathit{container} : \mathit{image}
+        \end{equation*}
+
         \item Images are serialisable and versioned and they are usually shared by means of public \alert{repositories}
     \end{itemize}
 
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+    \frametitle{Collateral aspects}
+
+    \begin{block}{Several aspects must be \textbf{virtualised} to support containers' operation}
+        \begin{description}
+            \item[networks] and \alert{network interfaces}, as well as IP addresses, and host names, and TCP/UDP ports
+            %
+            \begin{itemize}\small
+                \item to support communication among containers over the Internet or LAN \dots
+                \item \ldots as if each container is a single machine
+            \end{itemize}
+
+            \item[volumes] and \alert{storage facilities}, as well as file systems
+            %
+            \begin{itemize}\small
+                \item to support each container has a fresh new environment\ldots
+                \item \ldots isolated from the host and other containers
+            \end{itemize}
+        \end{description}
+    \end{block}
+
+    \begin{block}{Several a abstractions can be \textbf{built} on top of containers}
+        \begin{description}
+            \item[serivces] | one or more functionally equivalent containers cooperating in serving requests from a single entry point
+
+            \item[stacks] | a collection of one or more services composed to provide higher-level facilities
+        \end{description}
+    \end{block}
 
 \end{frame}
 
@@ -113,7 +168,7 @@
 
     \end{itemize}
 
-    \vspace{.3cm}
+    \bigskip
 
     \begin{block}{}
         \alert{From now on}, you are \alert{encouraged} to use containers to submit your projects
@@ -123,26 +178,96 @@
 
 \subsection{Docker}
 
-\begin{frame}
-\frametitle{Docker}
+\begin{frame}[allowframebreaks]
+\frametitle{Docker in a Nutshell}
 
-    Docker is our Container Engine of choice, since it is the leading technology in this field
+    \begin{block}{Docker is our \textbf{container engine} of choice}
+        \begin{itemize}
+            \item since it is the leading technology in this field
+            \item it works uniformly on most common OS
+            \item relatively simple to install and use (w.r.t. competitors)
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Similar technologies}
+        \begin{itemize}
+            \item Kubernetes | \url{https://kubernetes.io}
+            \item Artifactory Docker Registry.
+            \item LXC
+            \item Hyper-V and Windows Containers.
+            \item rkt
+            \item Podman
+            \item CRI+O
+        \end{itemize}
+    \end{block}
     %
-    \vfill
+    \framebreak
     %
+    General architecture:
+    %
+    \begin{center}
+        \includegraphics[width=.8\linewidth]{img/client-vs-daemon.png}
+    \end{center}
+
+    \framebreak
+
+    \begin{block}{General command structure}
+        \centering\ttfamily
+
+        docker \alert{<resource>} \textit{<command>} <args>
+    \end{block}
+    %
+    where
+    %
+    \begin{description}\small
+        \item[\texttt{resource}] may be \texttt{container}, \texttt{image}, \texttt{service}, \texttt{volume}, etc.
+        \item[\texttt{command}] depends on the resource
+        \item[\texttt{args}] depend on the command
+    \end{description}
+    %
+    \begin{itemize}\small
+        \item[!] for some common commands the resource may be omitted since it's obvious
+    \end{itemize}
+
+    \framebreak
+
     \begin{itemize}
-        \item It assumes images are created out of an existing application by means of \alert{\texttt{Dockefile}s}
+
+        \item Docker assumes images are \alert{built} out of an existing application by means of \alert{\texttt{Dockefile}s}
 
         \begin{itemize}
             \item Think about an image as a shut-down OS where a single application -- along with all its dependencies -- is installed
         \end{itemize}
 
-        \vfill
+        \smallskip
 
         \item Containers can be instantiated (i.e. \alert{run}) out of some pre-existing image by invoking a program which is assumed to be installed on that image
 
         \begin{itemize}
             \item Think about the instantiation process as turning on the OS and invoking that application
+        \end{itemize}
+
+        \smallskip
+
+        \begin{center}
+            \includegraphics[width=.5\linewidth]{img/build-run-workflow.png}
+        \end{center}
+
+        \framebreak
+
+        \item Volumes, as well as networks, can be specified upon container instantiation
+        %
+        \begin{itemize}
+            \item provided that they have been previously defined
+            \item default choices are smart so that users may ignore these aspects most of the time
+        \end{itemize}
+
+        \bigskip
+
+        \item Services, stacks, and higher level abstractions are managed via ad-hoc components:
+        %
+        \begin{itemize}
+            \item such as Docker \alert{Compose} (cf. slide \ref{frame:compose}) or Docker \alert{Swarm} (cf. slide \ref{frame:swarm})
         \end{itemize}
 
     \end{itemize}
@@ -482,11 +607,40 @@
 %
 %\end{frame}
 
+\section{About Docker Compose}
+
+\begin{frame}%[allowframebreaks]
+    \frametitle{Docker Compose Functionalities}
+    \label{frame:compose}
+
+    \begin{itemize}
+        \item It is quite common that a number of containers must be (un)deployed \alert{together \& orderly}
+
+        \vfill
+
+        \item Compose helps users in doing so, via three main ingredients:
+        %
+        \begin{description}\small
+            \item[\texttt{docker-compose.yaml}] files\footnotemark | which \emph{declaratively} \alert{specifies} which containers should be instantiated, how, and in which order
+            \item[\texttt{docker-compose up}] command | which \alert{instantiates} a \texttt{docker-compose.yaml}, starting up a service composed by possibly many containers
+            \item[\texttt{docker-compose down}] command | which gracefully \alert{disposes} service, given its \texttt{docker-compose.yaml} specification
+        \end{description}
+
+        \vfill
+
+        \item Compose usually requires an ad-hoc plugin to be installed in your Docker engine
+
+    \end{itemize}
+
+    \footnotetext{\url{https://docs.docker.com/compose/compose-file}}
+
+\end{frame}
+
 \section{About Docker Swarm}
 
 \begin{frame}%[allowframebreaks]
     \frametitle{Docker Swarm Functionalities}
-
+    \label{frame:swarm}
 
     \begin{itemize}
         \item Docker engines may be run in \emph{Swarm} mode
@@ -509,20 +663,10 @@
         \item In Swarm mode, Docker engines support more functionalities:
         %
         \begin{description}
-            \item[services] | possibly replicated servers with automatic load distribution
-            \item[networks] | virtual networks shared by serveral containers or services
+                \item[services] | possibly \alert{replicated} servers with automatic load distribution
+%            \item[networks] | virtual networks shared by serveral containers or services
             \item[stacks] | ensembles of services which must be deployed together, possibly in an orderly fashion
         \end{description}
-
-        \vfill
-
-        \item You may consider exploring these aspects if you want to
-        %
-        \begin{itemize}
-            \item automate testing of your distributed system
-            \item make your DS demo reproducible
-        \end{itemize}
-
     \end{itemize}
 
 \end{frame}
