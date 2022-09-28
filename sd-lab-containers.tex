@@ -84,7 +84,7 @@
     \frametitle{Bare metal vs. VM vs. Containers}
 
     \begin{center}
-        \includegraphics[width=\linewidth]{img/vm-vs-containers.png}
+        \includegraphics[width=\linewidth]{figures/vm-vs-containers.png}
     \end{center}
 
 \end{frame}
@@ -145,9 +145,9 @@
 
     \begin{block}{Several a abstractions can be \textbf{built} on top of containers}
         \begin{description}
-            \item[serivces] | one or more functionally equivalent containers cooperating in serving requests from a single entry point
+            \item[serivces] --- one or more functionally equivalent containers cooperating in serving requests from a single entry point
 
-            \item[stacks] | a collection of one or more services composed to provide higher-level facilities
+            \item[stacks] --- a collection of one or more services composed to provide higher-level facilities
         \end{description}
     \end{block}
 
@@ -193,7 +193,7 @@
 
     \begin{block}{Similar technologies}
         \begin{itemize}
-            \item Kubernetes | \url{https://kubernetes.io}
+            \item Kubernetes --- \url{https://kubernetes.io}
             \item Artifactory Docker Registry.
             \item LXC
             \item Hyper-V and Windows Containers.
@@ -208,7 +208,7 @@
     General architecture:
     %
     \begin{center}
-        \includegraphics[width=.8\linewidth]{img/client-vs-daemon.png}
+        \includegraphics[width=.8\linewidth]{figures/client-vs-daemon.png}
     \end{center}
 
     \framebreak
@@ -252,7 +252,7 @@
         \smallskip
 
         \begin{center}
-            \includegraphics[width=.5\linewidth]{img/build-run-workflow.png}
+            \includegraphics[width=.5\linewidth]{figures/build-run-workflow.png}
         \end{center}
 
         \framebreak
@@ -292,13 +292,13 @@
 	where \texttt{<cmd>} may be one of the following:
 	%
 	\begin{description}
-		\item[\texttt{build}] | builds an image from a \alert{Dockerfile}
-		\item[\texttt{ls}] | lists all locally available images
-		\item[\texttt{pull}] | pulls an image from a \alert{repository} (you must be logged)
-		\item[\texttt{push}] | push an image to a \alert{repository} (you must be logged)
-		\item[\texttt{rm}] | remove one or more images
-		\item[\texttt{tag}] | creates a symbolic tag for an image
-		\item[\texttt{--help}] | shows the list of available commands for images
+		\item[\texttt{build}] --- builds an image from a \alert{Dockerfile}
+		\item[\texttt{ls}] --- lists all locally available images
+		\item[\texttt{pull}] --- pulls an image from a \alert{repository} (you must be logged)
+		\item[\texttt{push}] --- push an image to a \alert{repository} (you must be logged)
+		\item[\texttt{rm}] --- remove one or more images
+		\item[\texttt{tag}] --- creates a symbolic tag for an image
+		\item[\texttt{--help}] --- shows the list of available commands for images
 
 	\end{description}
 
@@ -361,23 +361,23 @@
     \item We will only exploit the following options in this lesson:
     %
     \begin{description}\small
-        \item[\texttt{-i}] | runs the container in \emph{\alert{i}nteractive} mode
+        \item[\texttt{-i}] --- runs the container in \emph{\alert{i}nteractive} mode
 
-        \item[\texttt{-t}] | runs the container in \emph{\alert{t}erminal} emulation mode
+        \item[\texttt{-t}] --- runs the container in \emph{\alert{t}erminal} emulation mode
 
-        \item[\texttt{-d}] | runs the container in \emph{\alert{d}aemon} mode \hint{daemons = services}
+        \item[\texttt{-d}] --- runs the container in \emph{\alert{d}aemon} mode \hint{daemons = services}
 
-        \item[\texttt{--rm}] | \emph{\alert{r}e\alert{m}oves} the container after it terminates
+        \item[\texttt{--rm}] --- \emph{\alert{r}e\alert{m}oves} the container after it terminates
 
-        \item[\texttt{-e \textit{<key>}=<value>}] | sets an \emph{\alert{e}nvironment} variable \texttt{\textit{<key>}} to \texttt{<value>} on the container, before \texttt{<cmd>} is invoked
+        \item[\texttt{-e \textit{<key>}=<value>}] --- sets an \emph{\alert{e}nvironment} variable \texttt{\textit{<key>}} to \texttt{<value>} on the container, before \texttt{<cmd>} is invoked
 
-        \item[\texttt{-p \textit{<host>}:<guest>}] | \emph{\alert{p}ublish} port \texttt{<guest>} on the container to port \texttt{\textit{<host>}} on the host
+        \item[\texttt{-p \textit{<host>}:<guest>}] --- \emph{\alert{p}ublish} port \texttt{<guest>} on the container to port \texttt{\textit{<host>}} on the host
 
-        \item[\texttt{-h \textit{<hostname>}}]  |  sets the \emph{\alert{h}ostname} of the container to \texttt{\textit{<hostname>}}
+        \item[\texttt{-h \textit{<hostname>}}]  ---  sets the \emph{\alert{h}ostname} of the container to \texttt{\textit{<hostname>}}
 
-        \item[\texttt{-v \textit{<host path>}:<guest path>}]  |  mounts the host's \texttt{\textit{<host path>}} on the container, into \texttt{<guest path>}, as a \emph{\alert{v}olume}
+        \item[\texttt{-v \textit{<host path>}:<guest path>}]  ---  mounts the host's \texttt{\textit{<host path>}} on the container, into \texttt{<guest path>}, as a \emph{\alert{v}olume}
 
-        \item[\texttt{--name \textit{<name>}}]  |  assigns a unique \emph{\alert{n}ame} to the container
+        \item[\texttt{--name \textit{<name>}}]  ---  assigns a unique \emph{\alert{n}ame} to the container
     \end{description}
 
     \framebreak
@@ -531,13 +531,13 @@
     \begin{enumerate}
         \item Conder the following Java program, and sopposed it has been properly Gradlefied
         %
-        \lstinputlisting[language=Java]{./src/App1.java}
+        \lstinputlisting[language=Java]{./listings/App1.java}
 
         \framebreak
 
         \item Create a new file named \alert{\texttt{Dockerfile}} withing the project root directory (say \alert{\texttt{my-app}}), containing the following lines:
         %
-        \lstinputlisting[language=docker]{./src/Dockerfile1}
+        \lstinputlisting[language=docker]{./listings/Dockerfile1}
 
         \framebreak
 
@@ -623,9 +623,9 @@
         \item Compose helps users in doing so, via three main ingredients:
         %
         \begin{description}\small
-            \item[\texttt{docker-compose.yaml}] files\footnotemark | which \emph{declaratively} \alert{specifies} which containers should be instantiated, how, and in which order
-            \item[\texttt{docker-compose up}] command | which \alert{instantiates} a \texttt{docker-compose.yaml}, starting up a service composed by possibly many containers
-            \item[\texttt{docker-compose down}] command | which gracefully \alert{disposes} service, given its \texttt{docker-compose.yaml} specification
+            \item[\texttt{docker-compose.yaml}] files\footnotemark --- which \emph{declaratively} \alert{specifies} which containers should be instantiated, how, and in which order
+            \item[\texttt{docker-compose up}] command --- which \alert{instantiates} a \texttt{docker-compose.yaml}, starting up a service composed by possibly many containers
+            \item[\texttt{docker-compose down}] command --- which gracefully \alert{disposes} service, given its \texttt{docker-compose.yaml} specification
         \end{description}
 
         \vfill
@@ -665,9 +665,9 @@
         \item In Swarm mode, Docker engines support more functionalities:
         %
         \begin{description}
-                \item[services] | possibly \alert{replicated} servers with automatic load distribution
-%            \item[networks] | virtual networks shared by serveral containers or services
-            \item[stacks] | ensembles of services which must be deployed together, possibly in an orderly fashion
+                \item[services] --- possibly \alert{replicated} servers with automatic load distribution
+%            \item[networks] --- virtual networks shared by serveral containers or services
+            \item[stacks] --- ensembles of services which must be deployed together, possibly in an orderly fashion
         \end{description}
     \end{itemize}
 
