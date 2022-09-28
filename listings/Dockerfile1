@@ -9,7 +9,7 @@ WORKDIR /my-app/
 # Compiles the to-be-deployed app
 RUN ./gradlew build
 # Sets some env. var. on the container
-ENV USERNAME %*\textit{<your name>}*)
+ENV USERNAME (*@\textit{<your name>}@*)
 ENV GRD_OPTS --console=plain
 # Run the application by default
 CMD ./gradlew run $GRD_OPTS
