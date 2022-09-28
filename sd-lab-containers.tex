@@ -1,44 +1,46 @@
-% !TeX spellcheck = en_GB
-\documentclass{beamer}\mode<presentation>{\usetheme{AMSBolognaFC}}
-\setbeamertemplate{bibliography item}{\insertbiblabel}
-
-\usepackage{common}
-
-\newcommand{\labN}{2}
-
-\title[L\labN{} -- Containers 101]{L\labN{} -- Containers 101}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SD Lab -- Containers
+% Giovanni Ciatto
+% Alma Mater Studiorum - Università di Bologna
+% mailto:giovanni.ciatto@unibo.it
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\documentclass[handout]{beamer}\mode<handout>{\usetheme{default}}
 %
-\subtitle[SD]{Distributed Systems / Technologies}
+\documentclass[presentation]{beamer}\mode<presentation>{\usetheme{AMSBolognaFC}}
+%\documentclass[handout]{beamer}\mode<handout>{\usetheme{AMSBolognaFC}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{sd-lab-common}
+\usepackage{sd-lab-containers}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[\currentLab{} -- Containers 101]{Containers 101}
 %
-\author[Ciatto \and Omicini]
-{\emph{Giovanni Ciatto} \and Andrea Omicini\\
-\texttt{giovanni.ciatto@unibo.it \and andrea.omicini@unibo.it}}
+\subtitle{\courseName{} (\courseAcronym) / Module \moduleN{}}
 %
-\institute[DISI, Univ. Bologna]
-{Dipartimento di Informatica -- Scienza e Ingegneria (DISI)\\\textsc{Alma Mater Studiorum} -- Universit{\`a} di Bologna a Cesena}
-%
-\date[A.Y. 2021/2022]{Academic Year 2021/2022}
-
-\setbeamercovered{transparent}
-
-\AtBeginSection[]
-{
-\begin{frame}[c]\frametitle{Next in Line\ldots}
-%    \begin{multicols}{2}
-        \tableofcontents[sectionstyle=show/shaded, subsectionstyle=show/hide, subsubsectionstyle=hide/hide]
-%    \end{multicols}
-\end{frame}
+\author[\sspeaker{\gcShort} \& \mmShort]{
+	\speaker{\gcFull} \and \mmFull
+	\\ 
+	\gcEmail \and \mmEmail
 }
-
+%
+\institute[\disiShort, \uniboShort]{\disi{} (\disiShort)\\\unibo}
+%
+\date[A.Y. \academicYear{}]{Academic Year \academicYear{}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\maketitle
+%/////////
+\frame{\titlepage}
+%/////////
 
-\begin{frame}[c]\frametitle{Outline}
-    % \begin{multicols}{2}
-	    \tableofcontents[sectionstyle=show/show, subsectionstyle=show/show, subsubsectionstyle=show/show]
-    % \end{multicols}
-\end{frame}
+%%===============================================================================
+\section*{Outline}
+%%===============================================================================
+%
+%%/////////
+\frame[c]{\tableofcontents[hideallsubsections]}
+%%/////////
 
 \section{Motivation}
 
