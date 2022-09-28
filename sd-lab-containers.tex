@@ -525,17 +525,35 @@
 
 \end{frame}
 
+\startDemo
 \begin{frame}[allowframebreaks]
-\frametitle{Dockerfiles -- Example}
+\frametitle{Dockerfiles -- Demo \currentDemo: JEcho Dockerization}
+
+    \begin{exampleblock}{This example is on GitLab as well}
+        \begin{itemize}\small
+            \item \url{\gitlabRepo}
+            %
+            \begin{itemize}
+                \item look at \texttt{jecho/README.md}
+            \end{itemize}
+        \end{itemize}
+    \end{exampleblock}
+
+    \framebreak
 
     \begin{enumerate}
-        \item Conder the following Java program, and sopposed it has been properly Gradlefied
+
+        \item Consider the JEcho application from the previous lab
         %
-        \lstinputlisting[language=Java]{./listings/App1.java}
+        \begin{itemize}
+            \item an echo application with upper- and lower-case modalities
+            \item adequately Gradlefied to start via \alert{\texttt{gradle(w) run}}
+            \item altered to greet the user mentioned by the \alert{\texttt{JECHO\_USER}} env. var.
+        \end{itemize}
 
         \framebreak
 
-        \item Create a new file named \alert{\texttt{Dockerfile}} withing the project root directory (say \alert{\texttt{my-app}}), containing the following lines:
+        \item Create a new file named \alert{\texttt{Dockerfile}} within the project root directory (i.e. \alert{\texttt{jecho}}), containing the following lines:
         %
         \lstinputlisting[language=docker]{./listings/Dockerfile1}
 
@@ -544,10 +562,10 @@
         \item Build the new image by executing the following command:
         %
         \begin{itemize}
-            \item[\$] \texttt{docker \alert{build} -t <DockerID>/my-app \alert{.}}\hint{pay attention to the dot}
+            \item[\$] \texttt{docker \alert{build} -t <DockerID>/jecho \alert{.}}\hint{pay attention to the dot}
             \begin{itemize}
                 \item where \texttt{DockerID} is your username on \href{https://hub.docker.com/}{Dockerhub}
-                \item and \alert{\texttt{<DockerID>/my-app}} is a \alert{tag} for the newly created image
+                \item and \alert{\texttt{<DockerID>/jecho}} is a \alert{tag} for the newly created image
             \end{itemize}
         \end{itemize}
 
@@ -560,29 +578,29 @@
         \item Can you spot the new entry? You can instantiate it as a \alert{named} container by typing
         %
         \begin{itemize}
-            \item[\$] \texttt{docker run -t -i \alert{--name my-app} <DockerID>/my-app}
+            \item[\$] \texttt{docker run -t -i \alert{--name jecho} <DockerID>/jecho}
         \end{itemize}
 
         \item Run the app until it terminates. Can you understand how inputs can be provided to containerised applications?
 
         \framebreak
 
-        \item From now on, you can re-run the app by typing
+        \item From now on, you can re-run the \alert{same} container by typing
         %
         \begin{itemize}
-            \item[\$] \texttt{docker [container] \alert{start} -i -a my-app}
+            \item[\$] \texttt{docker [container] \alert{start} -i -a jecho}
         \end{itemize}
 
         \item Assuming you own an account on \href{https://hub.docker.com/}{DockerHub}, and your local Docker is properly \emph{logged in}, you can now \alert{push} your newly created image by typing
         %
         \begin{itemize}
-            \item[\$] \texttt{docker [image] \alert{push} <DockerID>/my-app}
+            \item[\$] \texttt{docker [image] \alert{push} <DockerID>/jecho}
         \end{itemize}
 
         \item Now everybody can \alert{pull} your image for using it. You can try with your colleagues ones by typing
         %
         \begin{itemize}
-            \item[\$] \texttt{docker [image] \alert{pull} <Colleague-DockerID>/my-app}
+            \item[\$] \texttt{docker [image] \alert{pull} <Colleague-DockerID>/jecho}
             \begin{itemize}
                 \item What a great way to distribute software! :)
             \end{itemize}
@@ -611,24 +629,24 @@
 
 \section{About Docker Compose}
 
-\begin{frame}%[allowframebreaks]
+\begin{frame}[allowframebreaks]
     \frametitle{Docker Compose Functionalities}
     \label{frame:compose}
 
     \begin{itemize}
         \item It is quite common that a number of containers must be (un)deployed \alert{together \& orderly}
 
-        \vfill
+        \bigskip
 
         \item Compose helps users in doing so, via three main ingredients:
         %
         \begin{description}\small
             \item[\texttt{docker-compose.yaml}] files\footnotemark --- which \emph{declaratively} \alert{specifies} which containers should be instantiated, how, and in which order
-            \item[\texttt{docker-compose up}] command --- which \alert{instantiates} a \texttt{docker-compose.yaml}, starting up a service composed by possibly many containers
-            \item[\texttt{docker-compose down}] command --- which gracefully \alert{disposes} service, given its \texttt{docker-compose.yaml} specification
+            \item[\texttt{docker-compose up}] command --- which \alert{instantiates} a \texttt{docker-compose.yaml} file, starting up all containers therein defined, in an orderly fashion
+            \item[\texttt{docker-compose down}] command --- which gracefully \alert{disposes} the containers, defined into the local \texttt{docker-compose.yaml} specification
         \end{description}
 
-        \vfill
+        \bigskip
 
         \item Compose usually requires an ad-hoc plugin to be installed in your Docker engine
 
@@ -636,11 +654,23 @@
 
     \footnotetext{\url{https://docs.docker.com/compose/compose-file}}
 
+    \bigskip
+
+    \begin{exampleblock}{Example about these aspects are provided on GitLab}
+        \begin{itemize}\small
+            \item \url{\gitlabRepo}
+            %
+            \begin{itemize}
+                \item look at \texttt{hit-counter/README.md} and \texttt{my-blog/README.md} 
+            \end{itemize}
+        \end{itemize}
+    \end{exampleblock}
+
 \end{frame}
 
 \section{About Docker Swarm}
 
-\begin{frame}%[allowframebreaks]
+\begin{frame}[allowframebreaks]
     \frametitle{Docker Swarm Functionalities}
     \label{frame:swarm}
 
@@ -651,7 +681,7 @@
             \item[\$] \texttt{docker swarm init{\color{gray}|join}}
         \end{itemize}
 
-        \vfill
+        \bigskip
 
         \item Swarms are \alert{clusters} of machines running \emph{federated} Docker engines
         %
@@ -660,7 +690,7 @@
             \item container may be executed/replicated on several nodes
         \end{itemize}
 
-        \vfill
+        \bigskip
 
         \item In Swarm mode, Docker engines support more functionalities:
         %
@@ -669,7 +699,29 @@
 %            \item[networks] --- virtual networks shared by serveral containers or services
             \item[stacks] --- ensembles of services which must be deployed together, possibly in an orderly fashion
         \end{description}
+
+        \framebreak
+
+        \item Swarm enables \alert{cluster administration}, via three main ingredients:
+        %
+        \begin{description}\small
+            \item[\texttt{docker-compose.yaml}] same syntax and purpose as in Docker Compose: describing stacks of services (each one consisting of one or more containers)
+            \item[\texttt{docker stack deploy}] command --- which \alert{instantiates} a \texttt{docker-compose.yaml} stack, starting up all the services there in contained, possibly \alert{spreading them into the cluster}
+            \item[\texttt{docker stack rm}] command --- which gracefully \alert{disposes} a stack, given its name
+        \end{description}
     \end{itemize}
+
+    \bigskip
+
+    \begin{exampleblock}{Example about these aspects are provided on GitLab}
+        \begin{itemize}\small
+            \item \url{\gitlabRepo}
+            %
+            \begin{itemize}
+                \item look at \texttt{hit-counter/README.md} and \texttt{hit-counter2/README.md} 
+            \end{itemize}
+        \end{itemize}
+    \end{exampleblock}
 
 \end{frame}
 
