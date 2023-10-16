@@ -300,7 +300,7 @@
 		\item[\texttt{push}] --- push an image to a \alert{repository} (you must be logged)
 		\item[\texttt{rm}] --- remove one or more images
 		\item[\texttt{tag}] --- creates a symbolic tag for an image
-		\item[\texttt{--help}] --- shows the list of available commands for images
+		\item[\texttt{{-}-help}] --- shows the list of available commands for images
 
 	\end{description}
 
@@ -369,7 +369,7 @@
 
         \item[\texttt{-d}] --- runs the container in \emph{\alert{d}aemon} mode \hint{daemons = services}
 
-        \item[\texttt{--rm}] --- \emph{\alert{r}e\alert{m}oves} the container after it terminates
+        \item[\texttt{{-}-rm}] --- \emph{\alert{r}e\alert{m}oves} the container after it terminates
 
         \item[\texttt{-e \textit{<key>}=<value>}] --- sets an \emph{\alert{e}nvironment} variable \texttt{\textit{<key>}} to \texttt{<value>} on the container, before \texttt{<cmd>} is invoked
 
@@ -379,7 +379,7 @@
 
         \item[\texttt{-v \textit{<host path>}:<guest path>}]  ---  mounts the host's \texttt{\textit{<host path>}} on the container, into \texttt{<guest path>}, as a \emph{\alert{v}olume}
 
-        \item[\texttt{--name \textit{<name>}}]  ---  assigns a unique \emph{\alert{n}ame} to the container
+        \item[\texttt{{-}-name \textit{<name>}}]  ---  assigns a unique \emph{\alert{n}ame} to the container
     \end{description}
 
     \framebreak
@@ -580,7 +580,7 @@
         \item Can you spot the new entry? You can instantiate it as a \alert{named} container by typing
         %
         \begin{itemize}
-            \item[\$] \texttt{docker run -t -i \alert{--name jecho} <DockerID>/jecho}
+            \item[\$] \texttt{docker run -t -i \alert{{-}-name jecho} <DockerID>/jecho}
         \end{itemize}
 
         \item Run the app until it terminates. Can you understand how inputs can be provided to containerised applications?
