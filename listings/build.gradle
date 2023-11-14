@@ -9,7 +9,7 @@ plugins {
 mainClassName = 'App' // Define the main class for the application
 
 dependencies {
-  compile 'com.google.guava:guava:23.0' // This dependency is found on compile classpath of this component and consumers.
+  compile 'com.google.guava:guava:23.6.1-jre' // This dependency is found on compile classpath of this component and consumers.
 
   testCompile 'junit:junit:4.12' // Use JUnit test framework
 }
