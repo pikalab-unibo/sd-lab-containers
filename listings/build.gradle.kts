@@ -20,7 +20,7 @@ application {
 
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
-    implementation("com.google.guava:guava:29.0-jre")
+    implementation("com.google.guava:guava:33.1.0-jre")
 
     // Use JUnit test framework
     testImplementation("junit:junit:4.13")
