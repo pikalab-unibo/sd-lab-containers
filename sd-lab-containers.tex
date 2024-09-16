@@ -415,7 +415,7 @@
             \item[\$] \texttt{docker run -i -e MY\_MSG="Hello World!" alpine sh}
             \begin{itemize}
                 \item No, Docker is not freezed :)
-                \item You simply started a \alert{very minimal} shell
+                \item You simply forgot to attach a \alert{pseudo-TTY} (\texttt{-t})
             \end{itemize}
         \end{itemize}
 
